@@ -1,5 +1,7 @@
 package com.jmuindi.dictionary;
 
+import java.io.IOException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -17,7 +19,6 @@ public class MainActivity extends Activity {
 		
 		
 		WebView wv = (WebView) findViewById(R.id.webView1);
-		String data = "<h2> HEllo Mama</h2>";
 		
 		 final Activity activity = this;
 		 wv.setWebChromeClient(new WebChromeClient() {
@@ -33,11 +34,20 @@ public class MainActivity extends Activity {
 		   }
 		 });
 		
-		wv.loadData(data, "text/html", null);
-		wv.loadUrl("http://www.google.com/search?q=define:hello");
-		showMsg("Done2");
+		showMsg("Loading Page...");
+		String data;
+		Dict d = new Dict(this);
+		d.execute("happy");
+		// data = Dict.lookup("hello");
+		//wv.loadData(data, "text/html", null);			
+		showMsg("End");
 	}
 
+
+	public void updateUI(String data) {
+		WebView wv = (WebView) findViewById(R.id.webView1);
+		wv.loadData(data, "text/html", null);
+	}
 	
 	public void showMsg(String text) {
 		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
