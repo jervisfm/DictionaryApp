@@ -1,14 +1,16 @@
 package com.jmuindi.dictionary;
 
-import java.io.IOException;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -48,11 +50,22 @@ public class MainActivity extends Activity {
 	public void doSearch(View v) {
 		showMsg("clicked");
 		
+		EditText et = (EditText) findViewById(R.id.searchText);
+		String word = et.getText().toString(); 
+		Dict dict = new Dict(this);		
+		InputMethodManager imm = (InputMethodManager)getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+		dict.execute(word);
+		getWindow().setSoftInputMode(
+			      WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 	}
 
 	public void updateUI(String data) {
 		WebView wv = (WebView) findViewById(R.id.webView1);
 		wv.loadData(data, "text/html", null);
+		
 	}
 	
 	public void showMsg(String text) {
