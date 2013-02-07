@@ -4,21 +4,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:hint="Search Definition" />
+
+        <Button
+            android:id="@+id/searchBtn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/searchText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="doSearch"
+            android:text="Search" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/RelativeLayout1"
+        android:layout_marginBottom="38dp"
+        android:layout_marginLeft="34dp"
+        android:layout_toRightOf="@+id/RelativeLayout1"
+        android:orientation="vertical" >
+    </LinearLayout>
+
     <WebView
         android:id="@+id/webView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/textView1" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="57dp"
-        android:layout_marginTop="68dp"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/RelativeLayout1" />
 
 </RelativeLayout>

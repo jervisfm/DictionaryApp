@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,13 +37,18 @@ public class MainActivity extends Activity {
 		
 		showMsg("Loading Page...");
 		String data;
-		Dict d = new Dict(this);
-		d.execute("happy");
+//		Dict d = new Dict(this);
+//		d.execute("emotional");
 		// data = Dict.lookup("hello");
 		//wv.loadData(data, "text/html", null);			
 		showMsg("End");
 	}
 
+	
+	public void doSearch(View v) {
+		showMsg("clicked");
+		
+	}
 
 	public void updateUI(String data) {
 		WebView wv = (WebView) findViewById(R.id.webView1);

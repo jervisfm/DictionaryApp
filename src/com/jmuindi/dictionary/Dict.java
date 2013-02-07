@@ -56,6 +56,8 @@ public class Dict extends AsyncTask<String, String, String> {
 		 * Data we want is in a "dict" class in a "ol" tag
 		 */
 		Document doc = Jsoup.parse(data);
+		/* Correctly output UNICODE chars */
+		doc.outputSettings().charset(Charsets.ISO_8859_1);
 		Elements elms = doc.getElementsByClass("dict");
 		ArrayList<Element> defs = new ArrayList<Element>();
 		StringBuffer sb = new StringBuffer();
@@ -166,7 +168,7 @@ public class Dict extends AsyncTask<String, String, String> {
 	protected String doInBackground(String... params) {
 		// TODO Auto-generated method stub
 		
-		try {
+		try {			
 			return getHtml(params[0]);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
