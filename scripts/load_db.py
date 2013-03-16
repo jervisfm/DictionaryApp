@@ -62,10 +62,12 @@ def load_database():
         print 'Processing Word %d of %d - %s' % (i, word_count, word)
         val = data[word]
         content = val['html']
+        if len(content) == 0:
+            continue
         insert_stmt = insert_template % (DB_TABLE)
         c.execute(insert_stmt, [word, curr_time, content])
         i += 1
-        
+
 
     conn.commit()
     conn.close()
