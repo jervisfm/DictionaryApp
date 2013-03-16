@@ -47,11 +47,13 @@ def create_db_schema():
 def load_database():
     conn = db_connect()
     c = conn.cursor()
+    print 'Loading Words to memory...'
     data = load_json()
+    print 'done. proceeding ...'
 
     global DB_TABLE
     curr_time = time.ctime()
-    insert_template = "INSERT INTO %s VALUES(NULL, '%s', '%s', '%s')"
+    insert_template = "INSERT INTO %s VALUES(NULL, ?, ?, ?)"
 
     word_count = len(data)
     print 'Loading %d Words to database' % word_count
@@ -60,9 +62,10 @@ def load_database():
         print 'Processing Word %d of %d - %s' % (i, word_count, word)
         val = data[word]
         content = val['html']
-        insert_stmt = insert_template % (DB_TABLE, word, curr_time, content)
-        c.execute(insert_stmt)
+        insert_stmt = insert_template % (DB_TABLE)
+        c.execute(insert_stmt, [word, curr_time, content])
         i += 1
+        
 
     conn.commit()
     conn.close()
