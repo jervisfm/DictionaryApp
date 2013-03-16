@@ -53,25 +53,27 @@ def load_database():
     curr_time = time.ctime()
     insert_template = "INSERT INTO %s VALUES(NULL, '%s', '%s', '%s')"
 
-    print len(data)
+    word_count = len(data)
+    print 'Loading %d Words to database' % word_count
+    i = 0
     for word in data:
+        print 'Processing Word %d of %d - %s' % (i, word_count, word)
         val = data[word]
-        print val
         content = val['html']
         insert_stmt = insert_template % (DB_TABLE, word, curr_time, content)
-        print insert_stmt
         c.execute(insert_stmt)
-        break
+        i += 1
+
     conn.commit()
     conn.close()
-    print 'loading complete'
+    print 'Database Loading Complete'
 
 def test():
     create_db_schema()
     load_database()
 
 def main():
-    print 'hi'
+    print 'DB Loader Script for words'
     test()
 
 if __name__ == '__main__':
